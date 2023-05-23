@@ -3,13 +3,20 @@ import styled from 'styled-components';
 
 type checkboxProp = {
     text: string;
-    // price: number;
+    price: number;
 }
+const CheckboxItem = styled.div`
+padding: 10px;
+border-radius: 8px;
+margin: .5rem 0;
+box-shadow: 0 0 15px rgba(0, 0, 0, .20)
+`
 const Checkbox = ({text}: checkboxProp) => {
   return (
-    <div>
-        <input type="checkbox" />{text}
-    </div>
+    <CheckboxItem>
+        <input type="checkbox" />
+        {text}
+    </CheckboxItem>
   )
 }
 
