@@ -1,14 +1,14 @@
 const checkboxData = [
     {
-        text: "Una página web (500€)",
+        text: "Una página web",
         price: 500
     },
     {
-        text: "Una consultoria SEO (300€)",
+        text: "Una consultoria SEO",
         price: 300
     },
     {
-        text: "Una campaña de Google Ads (200€)",
+        text: "Una campaña de Google Ads",
         price: 200
     }
 ]

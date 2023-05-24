@@ -24,8 +24,9 @@ function App() {
 		const updateCheckedState = isCheckedState.map((item, index) =>
 			index === itemPosition ? !item : item
       //esto marca la casilla. si el indice es identico a la posicion entonces se devuelve el valor contrario del item, que es true;
+      //tener en cuenta que no podemos poner "true" en el ternario. O sino siempre sera true, siendo imposible uncheckearlo
 		);
-
+    
 		setIsCheckedState(updateCheckedState);
 
 		const totalPrice = updateCheckedState.reduce(
@@ -41,10 +42,12 @@ function App() {
 		setTotal(totalPrice);
 	};
 
-  // useEffect(() => {
-  //   console.log("this is the Total", total);
+  useEffect(() => {
+    console.log("state isCheckedState", isCheckedState);
+
+    console.log("this is the Total", total);
     
-  // }, [total])
+  }, [isCheckedState])
   return (
 		<>
 			<CheckboxContainer>
