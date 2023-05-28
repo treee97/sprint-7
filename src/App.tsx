@@ -13,7 +13,9 @@ function App() {
   const [isCheckedState, setIsCheckedState] = useState<boolean[]>(
     new Array(checkboxData.length).fill(false)
   );
-  //isCheckedState array de booleans[false,false,false...]
+  const [totalPages, setTotalPages] = useState<number>(1);
+  const [totalLanguages, setTotalLanguages] = useState<number>(1);
+  const [totalExtras, setTotalExtras] = useState<number>(0);
 
   const handlerOnChange = (itemPosition: number) => {
     const updateCheckedState = isCheckedState.map(
@@ -34,13 +36,34 @@ function App() {
       0
     );
 
-    setTotal(totalPrice);
+    const extraPrice = totalWebsite(totalPages, totalLanguages);
+    const globalTotal = extraPrice + totalPrice;
+    setTotal(globalTotal);
   };
 
-  useEffect(() => {
-    console.log("state isCheckedState", isCheckedState);
-    // console.log("this is the Total", total);
-  }, [isCheckedState]);
+  const totalWebsite = (pages: number, languages: number) => {
+    return pages * languages * 30;
+  };
+
+  // useEffect(() => {
+  //   console.log("TotalPages =>", totalPages);
+  //   console.log("TotalLanguages =>", totalLanguages);
+  //   console.log(totalWebsite(totalPages, totalLanguages));
+
+  //   const extraPrice = totalWebsite(totalPages, totalLanguages);
+  //   setTotalExtras(extraPrice);
+  //   setTotal(total + totalExtras);
+  // }, []);
+
+  const onPageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const pages = Number(e.target.value);
+    setTotalPages(pages);
+  };
+  const onLanguageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const languages = Number(e.target.value);
+    setTotalLanguages(languages);
+  };
+
   return (
     <>
       <CheckboxContainer>
@@ -59,11 +82,21 @@ function App() {
               <WebsiteContainer className="scale-in-ver-center">
                 <div>
                   <p>Número de páginas</p>
-                  <input type="number" />
+                  <input
+                    type="text"
+                    value={totalPages}
+                    onChange={onPageChange}
+                    min="1"
+                  />
                 </div>
                 <div>
                   <p>Número de idiomas</p>
-                  <input type="number" />
+                  <input
+                    type="text"
+                    value={totalLanguages}
+                    onChange={onLanguageChange}
+                    min="1"
+                  />
                 </div>
               </WebsiteContainer>
             )}
