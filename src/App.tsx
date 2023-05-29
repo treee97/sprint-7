@@ -24,6 +24,16 @@ function App() {
     setIsCheckedState(updateCheckedState);
   };
 
+  const onPageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const pages = Number(e.target.value);
+    setTotalPages(pages);
+  };
+
+  const onLanguageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const languages = Number(e.target.value);
+    setTotalLanguages(languages);
+  };
+
   const totalWebsite = (pages: number, languages: number) => {
     return pages * languages * 30;
   };
@@ -37,19 +47,15 @@ function App() {
       }
     });
 
-    const extraPrice = totalWebsite(totalPages, totalLanguages);
+    let extraPrice = 0;
+    if (
+      isCheckedState[checkboxData.findIndex((item) => item.id === "website")]
+    ) {
+      extraPrice = totalWebsite(totalPages, totalLanguages);
+    }
     const globalTotal = totalPrice + extraPrice;
     setTotal(globalTotal);
   }, [isCheckedState, totalPages, totalLanguages]);
-
-  const onPageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const pages = Number(e.target.value);
-    setTotalPages(pages);
-  };
-  const onLanguageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const languages = Number(e.target.value);
-    setTotalLanguages(languages);
-  };
 
   return (
     <>
