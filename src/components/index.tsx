@@ -1,5 +1,3 @@
 import Checkbox from "./Checkbox/Checkbox";
-
-export{
-    Checkbox
-}
+import Overlay from "./Overlay/Overlay";
+export { Checkbox, Overlay };

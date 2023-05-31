@@ -4,6 +4,8 @@ import { WebsiteContainer } from "./styled-components/styles-components";
 import { ButtonContainer } from "./styled-components/styles-components";
 import { Input } from "./styled-components/styles-components";
 import { OptionContainer } from "./styled-components/styles-components";
+import { OverlayContainer } from "./styled-components/styles-components";
+import { OverlayItem } from "./styled-components/styles-components";
 export {
 	CheckboxItem,
 	CheckboxContainer,
@@ -11,4 +13,6 @@ export {
 	ButtonContainer,
 	Input,
 	OptionContainer,
+	OverlayContainer,
+	OverlayItem,
 };

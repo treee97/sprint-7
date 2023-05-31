@@ -25,8 +25,13 @@ a:hover {
 
 body {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   display: flex;
-  place-items: center;
+  /* Estas propiedades centran los items pero hacen que el modal tambien se mueva */
+  /* place-items: center; */
+  justify-content: center;
+  /* align-items: center; */
   min-width: 320px;
   min-height: 100vh;
   

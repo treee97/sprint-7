@@ -1,4 +1,5 @@
 import styled from "styled-components";
+// import { TfiHelpAlt } from "react-icons";
 
 //Checkbox.tsx component
 export const CheckboxItem = styled.div`
@@ -11,10 +12,13 @@ export const CheckboxItem = styled.div`
 
 export const CheckboxContainer = styled.div`
 	display: flex;
+	justify-content: center;
 	flex-direction: column;
+	min-height: 100vh;
 `;
 
 export const WebsiteContainer = styled.div`
+	position: relative;
 	box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 	margin: 0.5rem 0;
 	border-radius: 8px;
@@ -48,4 +52,27 @@ export const OptionContainer = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
+`;
+
+export const OverlayContainer = styled.div`
+	position: absolute;
+	left: 0;
+	right: 0;
+	min-height: 100vh;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(0, 0, 0, 0.3);
+`;
+
+export const OverlayItem = styled.div`
+	padding: 2rem;
+	background: rgba(255, 255, 255, 0.8);
+	box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+	width: 50vw;
+	cursor: pointer;
+	text-align: center;
+	border-radius: 8px;
+	// border: 1px solid red;
 `;
