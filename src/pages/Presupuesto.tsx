@@ -133,7 +133,7 @@ function Presupuesto() {
 									</ButtonContainer>
 									<TfiHelpAlt
 										style={{ fontSize: "1.5rem", cursor: "pointer" }}
-										onClick={() => setToggleModal1(true)}
+										onClick={() => setToggleModal1(!toggleModal1)}
 									/>
 								</OptionContainer>
 								<OptionContainer>
@@ -166,12 +166,13 @@ function Presupuesto() {
 									</ButtonContainer>
 									<TfiHelpAlt
 										style={{ fontSize: "1.5rem", cursor: "pointer" }}
-										onClick={() => setToggleModal2(true)}
+										onClick={() => setToggleModal2(!toggleModal2)}
 									/>
 								</OptionContainer>
 							</WebsiteContainer>
 						)}
-						{toggleModal1 === true && (
+
+						{toggleModal1 && (
 							<>
 								<Overlay
 									text="Este componente debe indicar el número de páginas que tendrá su sitio web"
@@ -179,7 +180,7 @@ function Presupuesto() {
 								/>
 							</>
 						)}
-						{toggleModal2 === true && (
+						{toggleModal2 && (
 							<>
 								<Overlay
 									text="Este componente debe indicar el número de idiomas que tendrá su sitio web"
