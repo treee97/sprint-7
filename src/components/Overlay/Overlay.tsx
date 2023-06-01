@@ -1,17 +1,16 @@
 import { OverlayContainer, OverlayItem } from "../../utils";
 // TfiHelpAlt;
 type overlayProp = {
-  onClick: () => void;
+	onClick: () => void;
+	text: string;
 };
 
-const Overlay = ({ onClick }: overlayProp) => {
-  return (
-    <OverlayContainer onClick={onClick}>
-      <OverlayItem>
-        Hello im IN the OverlayContainer. Im the overlay ITEM
-      </OverlayItem>
-    </OverlayContainer>
-  );
+const Overlay = ({ onClick, text }: overlayProp) => {
+	return (
+		<OverlayContainer onClick={onClick}>
+			<OverlayItem>{text}</OverlayItem>
+		</OverlayContainer>
+	);
 };
 
 export default Overlay;
