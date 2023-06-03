@@ -1,3 +1,6 @@
 import Checkbox from "./Checkbox/Checkbox";
 import Overlay from "./Overlay/Overlay";
-export { Checkbox, Overlay };
+import ClientePresupuesto from "./ClientePresupuesto/ClientePresupuesto";
+import Filtro from "./Filtros/Filtro";
+import Searcher from "./Searcher/Searcher";
+export { Checkbox, Overlay, ClientePresupuesto, Filtro, Searcher };

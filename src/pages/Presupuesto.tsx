@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { TfiHelpAlt } from "react-icons/tfi";
+import { BsSortAlphaDown, BsCalendarDate } from "react-icons/bs";
+import { AiOutlineReload } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import "../App.css";
-import { Checkbox, Overlay } from "../components";
+import {
+  Checkbox,
+  Overlay,
+  ClientePresupuesto,
+  Filtro,
+  Searcher,
+} from "../components";
 import { checkboxData } from "../constants";
 import {
   Container,
@@ -13,6 +21,7 @@ import {
   WebsiteContainer,
   PressupostContainer,
   BoxContainer,
+  FiltrosContainer,
 } from "../utils";
 // REACT ROUTER v6
 // https://www.youtube.com/watch?v=2aumoR0-jmQ
@@ -195,20 +204,28 @@ function Presupuesto() {
               )}
             </React.Fragment>
           ))}
-
+          Nombre Cliente:
+          <input type="text" name="name" id="name" />
+          nombre de presupuesto:
+          <input type="text" name="presupuesto" id="presupuesto" />
+          <input type="submit" value="Añadir Presupuesto" />
           <h3>Total Price: ${total}</h3>
-
           {/*!!!importante https://www.freecodecamp.org/news/how-to-work-with-multiple-checkboxes-in-react/ */}
           <Link to="/">Home</Link>
         </CheckboxContainer>
       </BoxContainer>
       <PressupostContainer>
-        <h2>Mis presupuestos</h2>
-        <p>
-          crear bloque ficticio que contenga, nombre cliente, nombre presupuesto
-          y date + los servicios seleccionados y el precio total. En el local
-          storage guardar los datos y llamarlos uno por uno
-        </p>
+        <h2 style={{ textTransform: "uppercase" }}>Mis presupuestos</h2>
+        <FiltrosContainer>
+          <Searcher />
+          <Filtro />
+          <Filtro />
+          <Filtro />
+        </FiltrosContainer>
+
+        <ClientePresupuesto />
+        <ClientePresupuesto />
+        <ClientePresupuesto />
       </PressupostContainer>
     </Container>
   );

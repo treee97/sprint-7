@@ -1,10 +1,6 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,7 +14,7 @@ export const BoxContainer = styled.div`
   align-items: center;
   //   outline: 3px solid blue;
 `;
-export const CheckboxContainer = styled.div`
+export const CheckboxContainer = styled.form`
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -46,11 +42,12 @@ export const WebsiteContainer = styled.div`
 export const PressupostContainer = styled.div`
   flex-basis: 30%;
   padding: 0 1rem;
+  margin: 2rem;
   //   outline: 2px solid red;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 15px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
-
-  min-height: 80vh;
+  overflow: auto;
+  max-height: 80vh;
 `;
 
 export const ButtonContainer = styled.button`
@@ -103,4 +100,31 @@ export const OverlayItem = styled.div`
   text-align: center;
   border-radius: 8px;
   // border: 1px solid red;
+`;
+
+// ===== CLIENTE PRESUPUESTO ==================
+export const ClienteContainer = styled.div`
+  // outline: 1px solid red;
+  margin: 1rem 0.5rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+`;
+
+export const ClienteItem = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+export const FiltrosContainer = styled.div`
+  // outline: 1px solid red;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+`;
+
+// === FILTRO COMPONENT ==============
+export const FiltroItem = styled.div`
+  // outline: 1px solid blue;
+  width: 2rem;
 `;

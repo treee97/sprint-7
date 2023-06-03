@@ -9,6 +9,10 @@ import { OverlayItem } from "./styled-components/styles-components";
 import { PressupostContainer } from "./styled-components/styles-components";
 import { Container } from "./styled-components/styles-components";
 import { BoxContainer } from "./styled-components/styles-components";
+import { ClienteContainer } from "./styled-components/styles-components";
+import { ClienteItem } from "./styled-components/styles-components";
+import { FiltrosContainer } from "./styled-components/styles-components";
+import { FiltroItem } from "./styled-components/styles-components";
 export {
   CheckboxItem,
   CheckboxContainer,
@@ -21,4 +25,8 @@ export {
   PressupostContainer,
   Container,
   BoxContainer,
+  ClienteContainer,
+  ClienteItem,
+  FiltrosContainer,
+  FiltroItem,
 };
