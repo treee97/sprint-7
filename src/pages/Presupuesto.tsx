@@ -19,7 +19,7 @@ import {
   Input,
   OptionContainer,
   WebsiteContainer,
-  PressupostContainer,
+  PresupostContainer,
   BoxContainer,
   FiltrosContainer,
 } from "../utils";
@@ -37,6 +37,46 @@ function Presupuesto() {
   //modal helper state
   const [toggleModal, setToggleModal] = useState<boolean>(false);
   const [modalText, setModalText] = useState<string>("");
+
+  const [nombreCliente, setNombreCliente] = useState<string>("");
+  const [nombrePresupuesto, setNombrePresupuesto] = useState<string>("");
+
+  //array de data
+  const [presupuesto, setPresupuesto] = useState<dataType[]>([]);
+
+  type dataType = {
+    servicios: string[];
+    pages: number;
+    languages: number;
+    total: number;
+    date: string;
+    clienteNombre: string;
+    presupuestoNombre: string;
+  };
+
+  const date = new Date();
+
+  const handleOnSubmit = (e: React.MouseEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const setData: dataType = {
+      pages: totalPages,
+      languages: totalLanguages,
+      total: total,
+      date: `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`,
+      //  - ${date.getHours()}:${date.getMinutes()}
+      clienteNombre: nombreCliente,
+      presupuestoNombre: nombrePresupuesto,
+      servicios: [],
+    };
+
+    setData.servicios = isCheckedState
+      .map((isChecked, index) => (isChecked ? checkboxData[index].id : null))
+      .filter((id) => id !== null) as string[];
+
+    setPresupuesto((prevPresupuesto) => [...prevPresupuesto, setData]);
+    console.log("presupuesto", presupuesto);
+    console.log("setData", setData);
+  };
 
   const handlerOnChange = (itemPosition: number) => {
     const updateCheckedState = isCheckedState.map(
@@ -81,7 +121,7 @@ function Presupuesto() {
 
     let extraPrice = 0;
     if (
-      isCheckedState[checkboxData.findIndex((item) => item.id === "website")]
+      isCheckedState[checkboxData.findIndex((item) => item.id === "Website")]
     ) {
       extraPrice = totalWebsite(totalPages, totalLanguages);
     }
@@ -117,7 +157,7 @@ function Presupuesto() {
                 id={item.id}
               />
 
-              {item.id === "website" && isCheckedState[index] && (
+              {item.id === "Website" && isCheckedState[index] && (
                 <WebsiteContainer className="scale-in-ver-center">
                   <OptionContainer>
                     <p style={{ marginRight: "8px" }}>Número de páginas</p>
@@ -205,28 +245,46 @@ function Presupuesto() {
             </React.Fragment>
           ))}
           Nombre Cliente:
-          <input type="text" name="name" id="name" />
+          <input
+            type="text"
+            value={nombreCliente}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setNombreCliente(e.target.value);
+            }}
+          />
           nombre de presupuesto:
-          <input type="text" name="presupuesto" id="presupuesto" />
-          <input type="submit" value="Añadir Presupuesto" />
+          <input
+            type="text"
+            value={nombrePresupuesto}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setNombrePresupuesto(e.target.value);
+            }}
+          />
+          <input
+            type="submit"
+            value="Añadir Presupuesto"
+            onClick={handleOnSubmit}
+          />
           <h3>Total Price: ${total}</h3>
           {/*!!!importante https://www.freecodecamp.org/news/how-to-work-with-multiple-checkboxes-in-react/ */}
           <Link to="/">Home</Link>
         </CheckboxContainer>
       </BoxContainer>
-      <PressupostContainer>
+      <PresupostContainer>
         <h2 style={{ textTransform: "uppercase" }}>Mis presupuestos</h2>
         <FiltrosContainer>
+          {/* //https://stackoverflow.com/questions/47998188/how-to-sort-an-object-alphabetically-within-an-array-in-react-js  ALFABETICAMENTE*/}
           <Searcher />
           <Filtro />
           <Filtro />
           <Filtro />
         </FiltrosContainer>
-
-        <ClientePresupuesto />
-        <ClientePresupuesto />
-        <ClientePresupuesto />
-      </PressupostContainer>
+        <>
+          {presupuesto.map((setData, index) => (
+            <ClientePresupuesto key={index} data={setData} />
+          ))}
+        </>
+      </PresupostContainer>
     </Container>
   );
 }

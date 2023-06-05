@@ -1,40 +1,55 @@
 import { ClienteContainer, ClienteItem } from "../../utils";
-
-// type clienteProps = {
-//   nombreCliente: string;
-//   data: string;
-//   nombrePresupuesto: string;
-//   servicios: {
-//  guardamos cada estado aqui? , isChecked, languages, pages, total.
-// };
-//   precioTotal: number; o lo guardamos por separado?
-// };
-
+type dataType = {
+  servicios: string[];
+  pages: number;
+  languages: number;
+  total: number;
+  date: string;
+  clienteNombre: string;
+  presupuestoNombre: string;
+};
+type clienteProps = {
+  data: dataType;
+};
 //Filtros no pueden ir aqui o se renderizaran cada vez
-const ClientePresupuesto = () => {
+const ClientePresupuesto = ({ data }: clienteProps) => {
+  const {
+    clienteNombre,
+    presupuestoNombre,
+    date,
+    total,
+    pages,
+    languages,
+    servicios,
+  } = data;
+
+  const websiteServicio = servicios.includes("Website");
   return (
     <>
       <ClienteContainer>
         <ClienteItem>
           <div>Nombre:</div>
-          <div>Marc</div>
+          <div>{clienteNombre}</div>
         </ClienteItem>
         <ClienteItem>
           <div>Nombre de Presupuesto:</div>
-          <div>Graficcsd qwjdi wqidoiou</div>
+          <div>{presupuestoNombre}</div>
         </ClienteItem>
         <ClienteItem>
           <div>Fecha de admision:</div>
-          <div>18 abril 2023</div>
+          <div>{date}</div>
         </ClienteItem>
         <hr />
         <ClienteItem>
           <div>Servicios solicitados:</div>
-          <div>website (3paginas, 2idiomas), SEO, Google Ads </div>
+          <div>
+            {servicios.join(", ")}
+            {websiteServicio && ` (${pages} página/s, ${languages} idioma/s)`}
+          </div>
         </ClienteItem>
         <ClienteItem>
           <div>Total a recibir:</div>
-          <div>€1283</div>
+          <div>€{total}</div>
         </ClienteItem>
       </ClienteContainer>
     </>
