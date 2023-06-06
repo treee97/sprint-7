@@ -1,6 +1,9 @@
 import { FiltroItem } from "../../utils";
-const Filtro = () => {
-  return <FiltroItem>Filtro</FiltroItem>;
+type filtroProps = {
+  onClick?: () => void;
+};
+const Filtro = ({ onClick }: filtroProps) => {
+  return <FiltroItem onClick={onClick}>Filtro</FiltroItem>;
 };
 
 export default Filtro;

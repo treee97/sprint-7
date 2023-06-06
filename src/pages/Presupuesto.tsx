@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { TfiHelpAlt } from "react-icons/tfi";
 import { BsSortAlphaDown, BsCalendarDate } from "react-icons/bs";
 import { AiOutlineReload } from "react-icons/ai";
-import { Link, json } from "react-router-dom";
+import { SortAlphabetically, SortByDate, ReverseSort } from "../utils";
+import { Link } from "react-router-dom";
 import "../App.css";
 import {
   Checkbox,
@@ -281,9 +282,9 @@ function Presupuesto() {
         <FiltrosContainer>
           {/* //https://stackoverflow.com/questions/47998188/how-to-sort-an-object-alphabetically-within-an-array-in-react-js  ALFABETICAMENTE*/}
           <Searcher />
-          <Filtro />
-          <Filtro />
-          <Filtro />
+          <Filtro onClick={SortAlphabetically} />
+          <Filtro onClick={SortByDate} />
+          <Filtro onClick={ReverseSort} />
         </FiltrosContainer>
         <>
           {presupuesto.map((setData, index) => (

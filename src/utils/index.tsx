@@ -13,6 +13,11 @@ import { ClienteContainer } from "./styled-components/styles-components";
 import { ClienteItem } from "./styled-components/styles-components";
 import { FiltrosContainer } from "./styled-components/styles-components";
 import { FiltroItem } from "./styled-components/styles-components";
+import {
+  SortAlphabetically,
+  SortByDate,
+  ReverseSort,
+} from "./SortFilters/SortFilters";
 export {
   CheckboxItem,
   CheckboxContainer,
@@ -29,4 +34,7 @@ export {
   ClienteItem,
   FiltrosContainer,
   FiltroItem,
+  SortAlphabetically,
+  SortByDate,
+  ReverseSort,
 };
