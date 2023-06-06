@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { TfiHelpAlt } from "react-icons/tfi";
 import { BsSortAlphaDown, BsCalendarDate } from "react-icons/bs";
 import { AiOutlineReload } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, json } from "react-router-dom";
 import "../App.css";
 import {
   Checkbox,
@@ -105,10 +105,12 @@ function Presupuesto() {
     const getState = window.localStorage.getItem("isCheckedState");
     const getPages = window.localStorage.getItem("pagesState");
     const getLanguages = window.localStorage.getItem("languagesState");
+    const getPresupuesto = window.localStorage.getItem("presupuestoArray");
 
     if (getState !== null) setIsCheckedState(JSON.parse(getState));
     if (getPages !== null) setTotalPages(JSON.parse(getPages));
     if (getLanguages !== null) setTotalLanguages(JSON.parse(getLanguages));
+    if (getPresupuesto !== null) setPresupuesto(JSON.parse(getPresupuesto));
   }, []);
 
   useEffect(() => {
@@ -140,7 +142,11 @@ function Presupuesto() {
       "languagesState",
       JSON.stringify(totalLanguages)
     );
-  }, [isCheckedState, totalPages, totalLanguages]);
+    window.localStorage.setItem(
+      "presupuestoArray",
+      JSON.stringify(presupuesto)
+    );
+  }, [isCheckedState, totalPages, totalLanguages, presupuesto]);
 
   return (
     <Container>
