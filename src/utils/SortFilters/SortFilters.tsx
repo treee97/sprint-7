@@ -1,19 +1,23 @@
 import { dataType } from "../types/types";
 
-export const SortAlphabetically = (data: any[]) => {
-	console.log(data);
-	// Ejemplo
-	const sorted = data.sort((itemA, itemB) =>
-		itemA.clienteNombre.localCompare(itemB.clienteNombre)
-	);
-	// const myData = this.state.contacts
-	//  .sort((a, b) => a.name.localeCompare(b.name))
-	//  .map((item, i) => <List key={i} data={item} />);
-	return sorted;
+export const SortAlphabetically = (data: dataType[]) => {
+  const arr = [...data];
+  const sortedArr = arr.sort((itemA, itemB) =>
+    itemA.clienteNombre.localeCompare(itemB.clienteNombre)
+  );
+  console.log(sortedArr);
+
+  return sortedArr;
 };
+
 export const SortByDate = () => {
-	return console.log("sortingDate");
+  return console.log("sortingDate");
 };
-export const ReverseSort = () => {
-	return console.log("reverseSort");
+
+export const ReverseSort = (data: dataType[]) => {
+  const arr = [...data];
+  console.log("arr", arr);
+  //wtf
+
+  return arr;
 };
