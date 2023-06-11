@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { TfiHelpAlt } from "react-icons/tfi";
 import { BsSortAlphaDown, BsCalendarDate } from "react-icons/bs";
-import { AiOutlineReload } from "react-icons/ai";
+import { AiOutlineReload, AiOutlineSearch } from "react-icons/ai";
 import { SortAlphabetically, SortByDate, ReverseSort } from "../utils";
 import { dataType } from "../utils/types/types";
 import { Link } from "react-router-dom";
@@ -11,7 +11,7 @@ import {
   Overlay,
   ClientePresupuesto,
   Filtro,
-  Searcher,
+  // Searcher,
 } from "../components";
 import { checkboxData } from "../constants";
 import {
@@ -43,8 +43,9 @@ function Presupuesto() {
 
   //array de data
   const [presupuesto, setPresupuesto] = useState<dataType[]>([] as dataType[]);
-  // const [Copiapresupuesto, setCopiaPresupuesto] = useState<dataType[]>();
+  const [presuCopy, setPresuCopy] = useState(presupuesto);
   const [sorted, setSorted] = useState<boolean>(true);
+  const [search, setSearch] = useState<string>("");
   const date = new Date();
 
   const handleOnSubmit = (e: React.MouseEvent<HTMLInputElement>) => {
@@ -65,6 +66,7 @@ function Presupuesto() {
       .filter((id) => id !== null) as string[];
 
     setPresupuesto((prevPresupuesto) => [...prevPresupuesto, setData]);
+    setPresuCopy((prevPresuCopy) => [...prevPresuCopy, setData]);
   };
 
   const handlerOnChange = (itemPosition: number) => {
@@ -87,27 +89,36 @@ function Presupuesto() {
   const totalWebsite = (pages: number, languages: number) => {
     return pages * languages * 30;
   };
+
   const handleSort = () => {
-    setPresupuesto(SortAlphabetically(presupuesto, sorted));
+    const sortAlphabetically = SortAlphabetically(presupuesto, sorted);
+    setPresupuesto(sortAlphabetically);
     setSorted(!sorted);
   };
+
   const handleDate = () => {
-    setPresupuesto(SortByDate(presupuesto, sorted));
+    const sortByDate = SortByDate(presupuesto, sorted);
+    setPresupuesto(sortByDate);
     setSorted(!sorted);
   };
 
-  useEffect(() => {
-    const getState = window.localStorage.getItem("isCheckedState");
-    const getPages = window.localStorage.getItem("pagesState");
-    const getLanguages = window.localStorage.getItem("languagesState");
-    const getPresupuesto = window.localStorage.getItem("presupuestoArray");
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // const arr = [...presupuesto];
+    // console.log(arr);
 
-    if (getState !== null) setIsCheckedState(JSON.parse(getState));
-    if (getPages !== null) setTotalPages(JSON.parse(getPages));
-    if (getLanguages !== null) setTotalLanguages(JSON.parse(getLanguages));
-    if (getPresupuesto !== null) setPresupuesto(JSON.parse(getPresupuesto));
-  }, []);
+    const filterData = presupuesto.filter((item) => {
+      return item.clienteNombre
+        .toLowerCase()
+        .includes(e.target.value.toLowerCase());
+    });
 
+    console.log(filterData);
+
+    setSearch(e.target.value);
+    setPresuCopy(filterData);
+  };
+
+  //TotalPrice logic
   useEffect(() => {
     let totalPrice = 0;
     isCheckedState.forEach((checked, index) => {
@@ -125,6 +136,19 @@ function Presupuesto() {
     const globalTotal = totalPrice + extraPrice;
     setTotal(globalTotal);
   }, [isCheckedState, totalPages, totalLanguages]);
+
+  //getItem LOCALSTORAGE
+  useEffect(() => {
+    const getState = window.localStorage.getItem("isCheckedState");
+    const getPages = window.localStorage.getItem("pagesState");
+    const getLanguages = window.localStorage.getItem("languagesState");
+    const getPresupuesto = window.localStorage.getItem("presupuestoArray");
+
+    if (getState !== null) setIsCheckedState(JSON.parse(getState));
+    if (getPages !== null) setTotalPages(JSON.parse(getPages));
+    if (getLanguages !== null) setTotalLanguages(JSON.parse(getLanguages));
+    if (getPresupuesto !== null) setPresupuesto(JSON.parse(getPresupuesto));
+  }, []);
 
   // ============== LOCALsTORAGE ===============================
   useEffect(() => {
@@ -274,18 +298,25 @@ function Presupuesto() {
       <PresupostContainer>
         <h2 style={{ textTransform: "uppercase" }}>Mis presupuestos</h2>
         <FiltrosContainer>
-          {/* //https://stackoverflow.com/questions/47998188/how-to-sort-an-object-alphabetically-within-an-array-in-react-js  ALFABETICAMENTE*/}
           {/* https://www.pluralsight.com/guides/passing-state-of-parent-to-child-component-as-props */}
-          {/* https://www.youtube.com/watch?v=SO5Z66tRW40 */}
-          {/* EXPORTAR TODO EL FORMULARIO EN UN COMPONENTE!!!! */}
-          <Searcher data={presupuesto} />
+          {/* <Searcher onSearch={handleSearch} /> */}
+          <div>
+            <AiOutlineSearch />
+            <input
+              type="text"
+              value={search}
+              name="search"
+              onChange={handleSearch}
+              id="search"
+            />
+          </div>
 
           <Filtro Icon={<BsSortAlphaDown />} onClick={handleSort} />
           <Filtro Icon={<BsCalendarDate />} onClick={handleDate} />
           <Filtro Icon={<AiOutlineReload />} onClick={() => {}} />
         </FiltrosContainer>
         <>
-          {presupuesto.map((setData, index) => (
+          {presuCopy.map((setData, index) => (
             <ClientePresupuesto key={index} data={setData} />
           ))}
         </>

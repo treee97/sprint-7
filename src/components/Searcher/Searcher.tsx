@@ -2,11 +2,16 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { useState } from "react";
 import { dataType } from "../../utils/types/types";
 
-const Searcher = ({ data }: { data: dataType[] }) => {
+type searchProps = {
+  onSearch: (value: string) => void;
+};
+const Searcher = ({ onSearch }: searchProps) => {
   const [search, setSearch] = useState<string>("");
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
+    const inputValue = e.target.value;
+    setSearch(inputValue);
+    onSearch(inputValue);
   };
 
   return (
