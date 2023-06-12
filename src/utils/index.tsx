@@ -16,7 +16,7 @@ import { FiltroItem } from "./styled-components/styles-components";
 import {
 	SortAlphabetically,
 	SortByDate,
-	ReverseSort,
+	// ReverseSort,
 } from "./SortFilters/SortFilters";
 export {
 	CheckboxItem,
@@ -36,5 +36,5 @@ export {
 	FiltroItem,
 	SortAlphabetically,
 	SortByDate,
-	ReverseSort,
+	// ReverseSort,
 };
